@@ -1,6 +1,10 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1&display=swap');
 
 @theme {
+  --font-black: "Black Han Sans", sans-serif;
+  --font-gothic: "Gothic A1", sans-serif;
+
   --breakpoint-xs: 360px;
   --breakpoint-sm: 720px;
   --breakpoint-md: 1080px;
@@ -12,7 +16,7 @@
 
 @layer base {
   body {
-    @apply bg-amber-500 font-sans text-indigo-950;
+    @apply bg-amber-500 font-gothic text-indigo-900;
 
     @variant dark {
       @apply bg-indigo-800 text-amber-500;
@@ -22,12 +26,16 @@
   h1,
   h2,
   h3 {
-    @apply font-bold;
+    @apply font-black;
   }
 }
 
 @layer components {
   .centralize {
     @apply flex items-center justify-center;
+  }
+
+  .heading {
+    @apply text-4xl font-black;
   }
 }
