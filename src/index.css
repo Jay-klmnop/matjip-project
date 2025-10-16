@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+@theme {
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 720px;
+  --breakpoint-md: 1080px;
+  --breakpoint-lg: 1440px;
+  --breakpoint-xl: 1800px;
+}
+
+@custom-variant dark (&.dark, .dark &);
+
+@layer base {
+  body {
+    @apply bg-amber-500 font-sans text-indigo-950;
+
+    @variant dark {
+      @apply bg-indigo-800 text-amber-500;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .centralize {
+    @apply flex items-center justify-center;
+  }
+}
