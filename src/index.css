@@ -21,7 +21,8 @@
   }
 
   h1,
-  h2 {
+  h2,
+  h3 {
     @apply font-black-sans font-black;
   }
 }
@@ -36,6 +37,18 @@
   }
 
   .sub-heading {
-    @apply text-2xl font-bold;
+    @apply absolute -top-4 bg-amber-500 px-4 text-4xl;
+  }
+
+  .card {
+    @apply bg-zinc-100 text-amber-500;
+  }
+
+  .card-heading {
+    @apply text-[28px] font-black;
+  }
+
+  .list {
+    @apply relative w-full min-w-80 flex-col border-2 border-zinc-100 px-4 pt-4;
   }
 }

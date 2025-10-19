@@ -1,7 +1,7 @@
-import { useFetch } from '@/hooks/useFetch';
+import { useFetch } from '@/hooks';
 import { useMatjipStore } from '@/store';
 import type { MatjipType } from '@/types';
-import { MatjipCard } from './MatjipCard';
+import { MatjipCard } from '@/components';
 
 export function MatjipList() {
   const { data: matjips, loading, error } = useFetch<MatjipType[]>('/places');
@@ -28,7 +28,7 @@ export function MatjipList() {
   if (error) return <p>에러가 발생했습니다! 다시 시도해주세요.</p>;
 
   return (
-    <div className='mx-4 my-4 grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4'>
+    <div className='mx-4 my-4 grid grid-cols-[repeat(auto-fit,minmax(335px,1fr))] gap-4 self-stretch'>
       {Array.isArray(matjips) && matjips.length > 0 ? (
         matjips?.map((matjip) => (
           <MatjipCard
