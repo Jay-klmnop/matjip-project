@@ -1,6 +1,6 @@
 import { useMatjipStore } from '@/store';
-import { MatjipCard } from './MatjipCard';
-import { useFetch } from '@/hooks/useFetch';
+import { MatjipCard } from '@/components';
+import { useFetch } from '@/hooks';
 import type { MatjipType } from '@/types';
 import { useEffect } from 'react';
 
@@ -25,7 +25,7 @@ export function LikedList() {
   if (error) return <p>에러 발생: {error.message}</p>;
 
   return (
-    <div className='mx-4 my-4 grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4'>
+    <div className='mx-4 my-4 grid grid-cols-[repeat(auto-fit,minmax(335px,1fr))] gap-4 self-stretch'>
       {Array.isArray(liked) && liked.length > 0 ? (
         liked.map((matjip) => (
           <MatjipCard
