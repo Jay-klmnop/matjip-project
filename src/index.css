@@ -51,4 +51,7 @@
   .list {
     @apply relative w-full min-w-80 flex-col border-2 border-zinc-100 px-4 pt-4;
   }
+  .message {
+    @apply h-16 py-4;
+  }
 }

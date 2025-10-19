@@ -23,9 +23,14 @@ export function MatjipList() {
     }
   };
 
-  if (loading) return <p>로딩 중입니다...</p>;
+  if (loading) return <p className='message'>로딩 중입니다...</p>;
   3000;
-  if (error) return <p>에러가 발생했습니다! 다시 시도해주세요.</p>;
+  if (error) {
+    if (error.message.includes('404')) {
+      return <p>404 error: 요청하신 데이터를 찾을 수 없습니다다</p>;
+    }
+    return <p className='message'>에러가 발생했습니다! 다시 시도해주세요.</p>;
+  }
 
   return (
     <div className='mx-4 my-4 grid grid-cols-[repeat(auto-fit,minmax(335px,1fr))] gap-4 self-stretch'>
