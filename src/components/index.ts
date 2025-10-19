@@ -1,3 +1,4 @@
-export * from './LikedList'
-export * from './MainList'
-export * from './MatjipCard'
+export * from './LikedList';
+export * from './LikeIcon';
+export * from './MatjipCard';
+export * from './MatjipList';
