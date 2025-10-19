@@ -21,8 +21,7 @@
   }
 
   h1,
-  h2,
-  h3 {
+  h2 {
     @apply font-black-sans font-black;
   }
 }
@@ -34,5 +33,9 @@
 
   .heading {
     @apply text-5xl text-amber-100;
+  }
+
+  .sub-heading {
+    @apply text-2xl font-bold;
   }
 }

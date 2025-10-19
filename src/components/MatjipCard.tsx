@@ -1,17 +1,29 @@
-export function MatjipCard() {
+import { LikeIcon } from '@/components';
+import type { MatjipType } from '@/types';
+
+interface MatjipCardProps {
+  matjip: MatjipType;
+  isLiked: boolean;
+  onToggleLiked: () => void;
+}
+
+export function MatjipCard({ matjip, isLiked, onToggleLiked }: MatjipCardProps) {
   return (
-    <div className='flex flex-col gap-2 items-center p-4 rounded-lg shadow-md transition-opacity duration-300 ease-in-out min-h-60 min-w-80'>
-      <figure className='overflow-hidden relative w-full rounded-lg'>
+    <div className='flex min-h-60 min-w-80 flex-col items-center gap-2 rounded-lg p-4 shadow-md transition-opacity duration-300 ease-in-out'>
+      <figure className='relative h-56 w-full overflow-hidden rounded-lg'>
         <img
-          src=''
-          alt=''
-          className='object-cover object-center absolute inset-0 w-full h-full'
+          src={`http://localhost:3000/${matjip.image.src}`}
+          alt={matjip.image.alt}
+          className='absolute inset-0 h-full w-full object-cover object-center'
           loading='lazy'
         />
       </figure>
-      <div className='w-full'>
-        <h3 className='h-14 text-lg font-bold text-left'></h3>
-        <p></p>
+      <div className='flex w-full flex-col gap-2 text-left'>
+        <div className='flex w-full justify-between'>
+          <h3 className='sub-heading w-72 text-left'>{matjip.title}</h3>
+          <LikeIcon isLiked={isLiked} onClick={onToggleLiked} />
+        </div>
+        <p>{matjip.description}</p>
       </div>
     </div>
   );
