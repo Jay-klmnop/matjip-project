@@ -45,13 +45,22 @@
   }
 
   .card-heading {
-    @apply text-[28px] font-black;
+    @apply text-[22px] font-black;
   }
 
   .list {
     @apply relative w-full min-w-80 flex-col border-2 border-zinc-100 px-4 pt-4;
   }
-  .message {
-    @apply h-16 py-4;
+
+  .like-bg {
+    @apply h-16 w-full bg-gradient-to-b from-zinc-50 to-transparent;
   }
+}
+
+.grid-list {
+  @apply mx-4 my-4 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 self-stretch sm:grid-cols-[repeat(auto-fit,minmax(270px,1fr))];
+}
+
+.message {
+  @apply h-16 py-4;
 }
