@@ -30,7 +30,7 @@ export function LikedList() {
   }
 
   return (
-    <div className='mx-4 my-4 grid grid-cols-[repeat(auto-fit,minmax(335px,1fr))] gap-4 self-stretch'>
+    <div className='grid-list'>
       {Array.isArray(liked) && liked.length > 0 ? (
         liked.map((matjip) => (
           <MatjipCard

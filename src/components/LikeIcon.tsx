@@ -1,4 +1,4 @@
-import { Star, StarOff } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 interface IconProps {
   isLiked: boolean;
@@ -8,7 +8,11 @@ interface IconProps {
 export function LikeIcon({ isLiked, onClick }: IconProps) {
   return (
     <button className='cursor-pointer' onClick={onClick}>
-      {isLiked ? <StarOff size={20} /> : <Star size={20} />}
+      {isLiked ? (
+        <Star size={24} fill='oklch(76.9% 0.188 70.08)' strokeWidth={3} />
+      ) : (
+        <Star size={24} />
+      )}
     </button>
   );
 }
