@@ -6,4 +6,6 @@ export interface MatjipType {
     alt: string;
   };
   description: string;
+  lat: number;
+  lon: number;
 }

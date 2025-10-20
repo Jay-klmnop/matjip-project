@@ -2,10 +2,38 @@ import { useFetch } from '@/hooks';
 import { useMatjipStore } from '@/store';
 import type { MatjipType } from '@/types';
 import { MatjipCard } from '@/components';
+import { useEffect, useState } from 'react';
+import { sortMatjipsByDistance } from '@/utils';
 
 export function MatjipList() {
   const { data: matjips, loading, error } = useFetch<MatjipType[]>('/places');
   const { liked, addLiked, removeLiked } = useMatjipStore();
+  const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
+  const [sortedMatjips, setSortedMatjips] = useState<MatjipType[]>([]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      },
+      (err) => {
+        console.error(err, ': 위치 가져오기에 실패했습니다');
+        setUserLocation(null);
+      },
+    );
+  }, []);
+
+  useEffect(() => {
+    if (matjips && userLocation) {
+      const sorted = sortMatjipsByDistance(matjips, userLocation.lat, userLocation.lon);
+      setSortedMatjips(sorted);
+    } else if (matjips) {
+      setSortedMatjips(matjips);
+    }
+  }, [matjips, userLocation]);
 
   const handleToggleLiked = async (matjip: MatjipType) => {
     const isLiked = liked.some((l) => l.id === matjip.id);
@@ -34,8 +62,8 @@ export function MatjipList() {
 
   return (
     <div className='grid-list'>
-      {Array.isArray(matjips) && matjips.length > 0 ? (
-        matjips?.map((matjip) => (
+      {Array.isArray(sortedMatjips) && sortedMatjips.length > 0 ? (
+        sortedMatjips?.map((matjip) => (
           <MatjipCard
             key={matjip.id}
             matjip={matjip}
