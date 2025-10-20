@@ -1,3 +1,5 @@
+import type { MatjipType } from '@/types';
+
 function toRad(value: number) {
   return (value * Math.PI) / 180;
 }
@@ -24,18 +26,12 @@ function calculateDistance({ lat1, lng1, lat2, lng2 }: CalculateDistanceType) {
   return d;
 }
 
-interface SortPlacesByDistanceType {
-  places: Array<{ lat: number; lon: number }>;
-  lat: number;
-  lon: number;
-}
-
-export function sortPlacesByDistance({ places, lat, lon }: SortPlacesByDistanceType) {
-  const sortedPlaces = [...places];
-  sortedPlaces.sort((a, b) => {
+export function sortMatjipsByDistance(matjips: MatjipType[], lat: number, lon: number) {
+  const sortedMatjips = [...matjips];
+  sortedMatjips.sort((a, b) => {
     const distanceA = calculateDistance({ lat1: lat, lng1: lon, lat2: a.lat, lng2: a.lon });
     const distanceB = calculateDistance({ lat1: lat, lng1: lon, lat2: b.lat, lng2: b.lon });
     return distanceA - distanceB;
   });
-  return sortedPlaces;
+  return sortedMatjips;
 }
