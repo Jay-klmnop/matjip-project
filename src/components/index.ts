@@ -1,3 +1,4 @@
+export * from './ConfirmModal';
 export * from './LikedList';
 export * from './LikeIcon';
 export * from './MatjipCard';

@@ -1,19 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --font-ibm: 'IBM Plex Sans KR', sans-serif --breakpoint-xs: 360px;
+  --font-ibm: 'IBM Plex Sans KR', sans-serif;
+  --font-bagel: 'Bagel Fat One', sans-serif;
+
+  --breakpoint-xs: 360px;
   --breakpoint-sm: 720px;
   --breakpoint-md: 1080px;
   --breakpoint-lg: 1440px;
   --breakpoint-xl: 1800px;
+
+  --color-subtle-orange: #f39945;
 }
 
 @custom-variant dark (&.dark, .dark &);
 
 @layer base {
   body {
-    @apply font-ibm bg-amber-500 text-center align-middle leading-none text-zinc-100;
+    @apply font-ibm bg-subtle-orange text-center align-middle leading-none text-zinc-50;
     @apply min-h-dvh;
   }
 
@@ -30,19 +36,23 @@
   }
 
   .heading {
-    @apply text-5xl text-amber-100;
+    @apply font-bagel text-6xl text-white;
   }
 
   .sub-heading {
-    @apply absolute -top-5 bg-amber-500 px-4 text-4xl;
+    @apply bg-subtle-orange absolute -top-5 left-5 px-4 text-3xl;
   }
 
   .card {
-    @apply bg-zinc-100 text-amber-500;
+    @apply bg-zinc-100 text-stone-900;
   }
 
   .card-heading {
     @apply text-xl font-black;
+  }
+
+  .sub-text {
+    @apply font-medium text-stone-600;
   }
 
   .list {
@@ -60,4 +70,12 @@
 
 .message {
   @apply h-16 py-4;
+}
+
+.modal {
+  @apply bg-zinc-100 text-xl font-semibold opacity-95;
+}
+
+.button {
+  @apply bg-subtle-orange rounded-lg px-4 py-0.5 text-lg text-zinc-50;
 }
