@@ -1,25 +1,8 @@
-import { useMatjipStore } from '@/store';
 import { MatjipCard } from '@/components';
-import { useFetch } from '@/hooks';
-import type { MatjipType } from '@/types';
-import { useEffect } from 'react';
+import { useLikedMatjips } from '@/hooks';
 
 export function LikedList() {
-  const {
-    data: likedMatjips,
-    loading,
-    error,
-  } = useFetch<{ places: MatjipType[] }>('/users/places');
-  const { liked, setLiked, removeLiked } = useMatjipStore();
-
-  useEffect(() => {
-    if (likedMatjips?.places) setLiked(likedMatjips.places);
-  }, [likedMatjips]);
-
-  const handleRemoveLiked = async (id: string) => {
-    await fetch(`/users/places/${id}`, { method: 'DELETE' });
-    removeLiked(id);
-  };
+  const { liked, removeLikedMatjip, loading, error } = useLikedMatjips();
 
   if (loading) return <p className='message'>로딩 중입니다...</p>;
   if (error) {
@@ -32,14 +15,16 @@ export function LikedList() {
   return (
     <div className='grid-list'>
       {Array.isArray(liked) && liked.length > 0 ? (
-        liked.map((matjip) => (
-          <MatjipCard
-            key={matjip.id}
-            matjip={matjip}
-            isLiked
-            onToggleLiked={() => handleRemoveLiked(matjip.id)}
-          />
-        ))
+        liked
+          .filter((matjip) => !!matjip && matjip.id)
+          .map((matjip) => (
+            <MatjipCard
+              key={matjip.id}
+              matjip={matjip}
+              isLiked
+              onToggleLiked={() => removeLikedMatjip(matjip.id)}
+            />
+          ))
       ) : (
         <p>찜한 맛집이 없습니다.</p>
       )}
