@@ -4,8 +4,14 @@ import { MatjipCard } from '@/components';
 import { useEffect, useState } from 'react';
 import { sortMatjipsByDistance } from '@/utils';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 export function MatjipList() {
-  const { data: matjips, loading: matjipLoading, error } = useFetch<MatjipType[]>('/places');
+  const {
+    data: matjips,
+    loading: matjipLoading,
+    error,
+  } = useFetch<MatjipType[]>(`${API_BASE}/places`);
   const { liked, toggleLikedMatjip, loading: likedLoading } = useLikedMatjips();
   const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
   const [sortedMatjips, setSortedMatjips] = useState<MatjipType[]>([]);

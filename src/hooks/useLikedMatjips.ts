@@ -2,6 +2,8 @@ import { useMatjipStore } from '@/store';
 import type { MatjipType } from '@/types';
 import { useEffect, useState } from 'react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 export const useLikedMatjips = () => {
   const { liked, setLiked, addLiked, removeLiked } = useMatjipStore();
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ export const useLikedMatjips = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/users/places');
+        const res = await fetch(`${API_BASE}/users/places`);
         if (!res.ok) throw new Error('찜한 맛집을 불러오지 못 했습니다');
         const data = await res.json();
 
@@ -34,11 +36,11 @@ export const useLikedMatjips = () => {
 
     try {
       if (isLiked) {
-        await fetch(`/users/places/${matjip.id}`, { method: 'DELETE' });
+        await fetch(`${API_BASE}/users/places/${matjip.id}`, { method: 'DELETE' });
         removeLiked(matjip.id);
       } else {
         console.log('Posting matjip:', matjip);
-        await fetch(`/users/places`, {
+        await fetch(`${API_BASE}/users/places`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(matjip),
@@ -52,7 +54,7 @@ export const useLikedMatjips = () => {
 
   const removeLikedMatjip = async (id: string) => {
     try {
-      await fetch(`/users/places/${id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/users/places/${id}`, { method: 'DELETE' });
       removeLiked(id);
     } catch (err) {
       console.error(err, ': 삭제 실패했습니다');
